@@ -1,10 +1,9 @@
 import Image from "next/image";
-
+import Header from "./components/Header";
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold">Hello World</h1>
-      <p className="text-sm">This is a test</p>
+    <div className="w-screen flex flex-col items-center justify-center h-screen">
+      <Header />
     </div>
   );
 }
