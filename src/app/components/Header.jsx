@@ -2,39 +2,76 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="w-screen lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-2 left-center bg-[#182338]">
-      <img
-        src="https://media-hosting.imagekit.io//e96ac2fefee24fb2/screenshot_1740614481519.png?Expires=1835222484&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=iL-A2ZZDKzV52h-gNxvhBDqcpKqyo~RmaHMDht021SZb-TdR8oeI1l74Feq~jly2-CB48u6QH70S-YxgRjmCVY6xGwG2sQrPc5lrWVOKTmLWA8z00-bLmx3EfpZVvg2PjXP81qS~QFH~kQHqfwbIKyZrFXOmgTQGRnAdtkKNMtdfiJQ3RxNS4gxq9BjKB90izZHO~dHKl1WiL7jcpx0TnQ5q9K0DXUoNRL6m2QUk2p3KajpU2OROfgpqTsbUVmftVbIzJCmSVrR3gwpFO7r1BAIBFJn3rZYHXUxv3GABv6WcPkjxomTYU2r~bjScd~uqvcAavK5LyY1QniCmUK2zkQ__"
-        className="h-4/5 w-auto"
-      ></img>
-
-      <div className="text-md lg:text-lg xl:text-xl  font-bold">
-        <text className="hidden xl:block">Home</text>
-        <div
-          data-svg-wrapper
-          style={{ position: "relative" }}
-          className="block xl:hidden"
-        >
+    <div className="w-screen lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-center bg-[#33436A]">
+      <div className="w-4/5 lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-center bg-[#33436A]">
+        <div className="">
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            class="size-6"
           >
             <path
-              d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15"
-              stroke="#F5F5F5"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+        </div>
+
+        <div className="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+            />
+          </svg>
+        </div>
+
+        <div className="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </div>
+
+        <div className="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
             />
           </svg>
         </div>
       </div>
-      <div className="text-md lg:text-lg xl:text-xl  font-bold">App</div>
-      <div className="text-md lg:text-lg xl:text-xl  font-bold">Reviews</div>
-      <div className="text-md lg:text-lg xl:text-xl  font-bold">About</div>
     </div>
   );
 }
