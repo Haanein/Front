@@ -11,7 +11,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
@@ -28,7 +28,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
@@ -45,7 +45,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
@@ -62,7 +62,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
+            className="size-6"
           >
             <path
               strokeLinecap="round"
