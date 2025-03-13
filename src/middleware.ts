@@ -1,12 +1,14 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { authMiddleware } from "@clerk/nextjs";
 
-export default clerkMiddleware();
+export default authMiddleware({
+  publicRoutes: ["/", "/login"], // Pages that don't require authentication
+  afterAuth(auth, req) {
+    if (!auth.userId && !auth.isPublicRoute) {
+      return Response.redirect(new URL("/login", req.url));
+    }
+  },
+});
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/((?!api|_next|.*\\..*).*)"], // Apply middleware to all pages except API and static files
 };
