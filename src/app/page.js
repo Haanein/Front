@@ -39,7 +39,7 @@ export default function Home() {
             key={index}
             className="rounded-3xl border border-slate-600 p-3 transition-transform transform hover:scale-105 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500"
           >
-            {label}
+            {label} 
           </button>
         ))}
       </div>
