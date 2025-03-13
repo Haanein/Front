@@ -7,3 +7,4 @@ export default function Home() {
     </div>
   );
 }
+// i literally dgaf abt anyone except my pretty beautiful smart and caring perfect gf so plz stfu and sybau if possible plz im talking to u madag sybau
