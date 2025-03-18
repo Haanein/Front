@@ -6,17 +6,17 @@ export default function Home() {
     "Restaurant",
     "Stores",
     "Convenience store",
-    "Stores",
-    "Restaurant",
-    "Stores",
-    "Convenience store",
-    "Stores",
+    "Cafe",
+    "Coffee Shops",
+    "Book Store",
+    "Library",
+    "Assassin",
   ];
 
   return (
     <div className="w-screen p-12 flex flex-col items-center justify-start h-screen bg-gray-900 text-white ">
       <Header />
-      <div className="border rounded-3xl w-full mb-8 p-4 border-slate-600 text-slate-400 flex items-center justify-between">
+      <div className="border rounded-3xl w-full mb-8 px-5 py-3 border-slate-600 text-slate-400 flex items-center justify-between">
         <span>Search here...</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,11 +33,11 @@ export default function Home() {
           />
         </svg>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <div className=" ">
         {buttonLabels.map((label, index) => (
           <button
             key={index}
-            className="rounded-3xl border border-slate-600 p-3 transition-transform transform hover:scale-105 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="whitespace-nowrap rounded-3xl text-sm mr-3 mb-3 border border-slate-600 px-6 py-2 transition-transform transform hover:scale-105 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500"
           >
             {label} 
           </button>
@@ -45,4 +45,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
+} 
