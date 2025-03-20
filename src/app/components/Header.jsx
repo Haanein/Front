@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="w-screen lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-center bg-[#33436A]">
-      <div className="w-4/5 lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-center bg-[#33436A] text-white">
+    <div className="z-[100] w-screen lg:w-1/2 xl:w-1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-1/2 transform -translate-x-1/2 ">
+      <div className="w-4/5 z-60 lg:w-1/2 xl:1/2 h-20 flex justify-around items-center rounded-full fixed bottom-10 left-center bg-[#33436A] text-white">
         <div className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
