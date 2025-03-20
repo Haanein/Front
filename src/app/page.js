@@ -14,7 +14,7 @@ export default function DashboardPage() {
         <div className="w-full max-w-md p-8 shadow-xl rounded-2xl border border-gray-300 bg-white text-center transition-transform transform scale-105">
           <h2 className="text-2xl font-bold text-white">Access Denied</h2>
           <p className="text-gray-600 mt-3 mb-6 text-sm">
-            You must be signed in to view this page.
+            You must be signed in to view this page 2.
           </p>
           <button
             onClick={() => router.push("/login")}
