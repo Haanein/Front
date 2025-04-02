@@ -4,10 +4,34 @@ import { useUser, UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Header from "./components/Header";
 import PlaceCard from "./components/PlaceCard";
+import { useState, useEffect } from "react";
 
 export default function DashboardPage() {
   const { isSignedIn, user } = useUser();
   const router = useRouter();
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        const response = await fetch("http://localhost:4200/api/places");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("API Response:", data); // Debugging output
+
+        // Ensure data.places exists and is an array
+        setPlaces(data?.data?.places || []);
+      } catch (error) {
+        console.error("Error fetching places:", error);
+        setPlaces([]); // Ensure places is always an array
+      }
+    };
+
+    fetchPlaces();
+  }, []);
+
   if (!isSignedIn) {
     return (
       <div className="w-screen h-screen flex justify-center items-center bg-gray-100 text-white">
@@ -29,7 +53,11 @@ export default function DashboardPage() {
   return (
     <div className="z-10 w-screen flex flex-col items-center justify-center h-screen text-white relative">
       <div className="w-[90%] h-[85%] flex flex-col justify-start items-start gap-10">
-        <h1 className="text-2xl font-bold">Sup, {user.firstName}!</h1>
+        <div className="w-full h-20 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Sup, {user.firstName}!</h1>
+          <UserButton />
+        </div>
+
         <div className="w-full h-auto flex flex-col justify-center items-around gap-4">
           <h2 className=" text-xl font-bold">Special :</h2>
           <div className="w-full h-36 border border-[#33436A] border-separate border-spacing-2 rounded-xl flex items-center justify-center">
@@ -54,11 +82,22 @@ export default function DashboardPage() {
               Market
             </div>
           </div>
-
-          <PlaceCard />
-          <PlaceCard />
-          <PlaceCard />
-          <PlaceCard />
+          <div className="flex flex-col gap-4">
+            {places.map((place) => (
+              <a href={`/${place._id}`} key={place._id}>
+                <PlaceCard
+                  name={place.name}
+                  img={place.image}
+                  desc={place.Description}
+                  rating={place.Rating}
+                  location={place.Location}
+                  categories={place.Categories}
+                  phone={place.PhoneNumber}
+                  link={place.PlaceLocationLink}
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
