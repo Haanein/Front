@@ -10,22 +10,24 @@ export default function DashboardPage() {
   const { isSignedIn, user } = useUser();
   const router = useRouter();
   const [places, setPlaces] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const response = await fetch("http://localhost:4200/api/places");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        const res = await fetch("http://localhost:4200/api/places");
+        if (!res.ok) {
+          setPlaces([]);
+          setLoading(false);
+          return;
         }
-        const data = await response.json();
-        console.log("API Response:", data); // Debugging output
-
-        // Ensure data.places exists and is an array
-        setPlaces(data?.data?.places || []);
+        const response = await res.json();
+        setPlaces(response?.data?.places || []);
       } catch (error) {
         console.error("Error fetching places:", error);
-        setPlaces([]); // Ensure places is always an array
+        setPlaces([]);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -49,6 +51,9 @@ export default function DashboardPage() {
         </div>
       </div>
     );
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
   return (
     <div className="z-10 w-screen flex flex-col items-center justify-center h-screen text-white relative">
@@ -84,18 +89,20 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-col gap-4">
             {places.map((place) => (
-              <a href={`/${place._id}`} key={place._id}>
-                <PlaceCard
-                  name={place.name}
-                  img={place.image}
-                  desc={place.Description}
-                  rating={place.Rating}
-                  location={place.Location}
-                  categories={place.Categories}
-                  phone={place.PhoneNumber}
-                  link={place.PlaceLocationLink}
-                />
-              </a>
+              // <a href={`/${place._id}`} key={place._id}>
+              <PlaceCard
+                key={place._id}
+                id={place._id} // Pass the ID to the component
+                name={place.name}
+                img={place.image}
+                desc={place.Description}
+                rating={place.Rating}
+                location={place.Location}
+                categories={place.Categories}
+                phone={place.PhoneNumber}
+                link={place.PlaceLocationLink}
+              />
+              // </a>
             ))}
           </div>
         </div>

@@ -1,6 +1,15 @@
 import React from "react";
+import Link from "next/link";
 
-export default function PlaceCard({ name, desc, categories, img, oc, rating }) {
+export default function PlaceCard({
+  name,
+  desc,
+  categories,
+  img,
+  oc,
+  rating,
+  id,
+}) {
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -44,36 +53,38 @@ export default function PlaceCard({ name, desc, categories, img, oc, rating }) {
   };
 
   return (
-    <div className="z-10 w-full h-28 border border-[#33436A] border-separate border-spacing-2 rounded-xl flex items-center justify-around relative overflow-hidden">
-      <div
-        className="z-10 bg-center bg-cover rounded-xl w-[28%] h-24 "
-        style={{ backgroundImage: `${img}` }}
-      ></div>
-      <div className="w-[62%] flex flex-col justify-around items-around gap-1">
-        <div className="absolute top-2 right-2">
-          <div className="bg-[#121B2C] w-14 h-5 flex items-center justify-center rounded-xl gap-1">
-            <div className="text-[#00D26A] text-sm">Open</div>
-            <div className="bg-[#00D26A] w-2 h-2 rounded-full"></div>
+    <Link href={`/${id}`} passHref>
+      <div className="z-10 w-full h-28 border border-[#33436A] border-separate border-spacing-2 rounded-xl flex items-center justify-around relative overflow-hidden">
+        <div
+          className="z-10 bg-center bg-cover rounded-xl w-[28%] h-24"
+          style={{ backgroundImage: `url(${img})` }} // Fix the backgroundImage syntax
+        ></div>
+        <div className="w-[62%] flex flex-col justify-around items-around gap-1">
+          <div className="absolute top-2 right-2">
+            <div className="bg-[#121B2C] w-14 h-5 flex items-center justify-center rounded-xl gap-1">
+              <div className="text-[#00D26A] text-sm">Open</div>
+              <div className="bg-[#00D26A] w-2 h-2 rounded-full"></div>
+            </div>
           </div>
-        </div>
-        <h1 className="text-white font-bold">{name}</h1>
+          <h1 className="text-white font-bold">{name}</h1>
 
-        <div className="flex">
-          <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-            {categories}
+          <div className="flex">
+            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
+              {categories}
+            </div>
+            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
+              {categories}
+            </div>
+            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
+              {categories}
+            </div>
           </div>
-          <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-            {categories}
+          <h2 className="text-gray-400 text-sm ">{desc}</h2>
+          <div className="flex">
+            <div className="flex">{renderStars(rating)}</div>
           </div>
-          <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-            {categories}
-          </div>
-        </div>
-        <h2 className="text-gray-400 text-sm ">{desc}</h2>
-        <div className="flex">
-          <div className="flex">{renderStars(rating)}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
