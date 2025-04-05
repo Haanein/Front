@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -18,6 +18,20 @@ export default function SignupPage() {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Initialize Clerk CAPTCHA when component mounts
+    if (window.Clerk && signUp) {
+      signUp
+        .create()
+        .then((response) => {
+          // CAPTCHA will be automatically handled by Clerk
+        })
+        .catch((err) => {
+          console.error("Error initializing CAPTCHA:", err);
+        });
+    }
+  }, [signUp]);
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -174,8 +188,7 @@ export default function SignupPage() {
               />
               {error && <p className="text-red-500 text-sm">{error}</p>}
 
-              {/* Add this div for Clerk CAPTCHA */}
-              <div id="clerk-captcha" className="w-full"></div>
+              {/* Clerk will automatically handle CAPTCHA */}
             </div>
 
             <div className="w-full flex justify-around items-start flex-col mt-6 space-y-4">

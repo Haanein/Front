@@ -68,7 +68,7 @@ export default function PlaceDetailPage() {
       </Head>
 
       <div
-        className="z-10 w-full h-2/5 flex justify-between items-start bg-center bg-cover bg-no-repeat p-2 fixed top-0 left-0"
+        className="w-full h-2/5 flex justify-between items-start bg-center bg-cover bg-no-repeat p-6 fixed top-0 left-0"
         style={{ backgroundImage: `url(${place.image})` }}
       >
         <div>
@@ -136,9 +136,24 @@ export default function PlaceDetailPage() {
           </svg>
         </div>
       </div>
-      <div className="z-20 -translate-2 max-w-screen mx-auto min-h-full h-full flex justify-center items-center flex-col">
-        <div className="w-[90%] h-full bg-gray-900 flex justify-center items-center text-white">
-          A
+      <div className="z-20 translate-y-36 max-w-screen mx-auto min-h-full h-full flex bg-darkblue justify-center items-center flex-col rounded-t-2xl">
+        <div className="w-full h-full bg-gray-900 flex justify-start items-center flex-col text-white p-4 gap-6">
+          <div className="w-14 h-[4px] bg-[#E2E2E2]"></div>
+          <div className="w-full h-20 border border-[1px] border-[#33436A] rounded-2xl flex justify-start items-center p-4 gap-4">
+            <div
+              style={{
+                backgroundImage: `url(${place.image})`,
+              }}
+              className="w-[80px] h-[60px] rounded-full"
+            />
+            <div className="flex flex-col justify-center items-start">
+              <p className="text-xl font-bold">{place.name}</p>
+              <p className="text-xs opacity-65">{place.Description}</p>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-full bg-gray-900 flex justify-start items-center flex-col text-white p-4 gap-6">
+          a
         </div>
       </div>
     </div>
