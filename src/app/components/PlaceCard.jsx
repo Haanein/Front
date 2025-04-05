@@ -69,15 +69,11 @@ export default function PlaceCard({
           <h1 className="text-white font-bold">{name}</h1>
 
           <div className="flex">
-            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-              {categories}
-            </div>
-            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-              {categories}
-            </div>
-            <div className="w-auto  p-2  h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
-              {categories}
-            </div>
+            {categories.map((el, index) => (
+              <div key={index} className="w-auto p-2 h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
+                {el}
+              </div>
+            ))}
           </div>
           <h2 className="text-gray-400 text-sm ">{desc}</h2>
           <div className="flex">

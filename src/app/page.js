@@ -60,7 +60,9 @@ export default function DashboardPage() {
       <div className="w-[90%] h-[85%] flex flex-col justify-start items-start gap-10">
         <div className="w-full h-20 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Sup, {user.firstName}!</h1>
-          <UserButton />
+          <div className="w-10 h-10 rounded-full border border-1 ">
+            <img src={user.imageUrl} alt="Profile Image" className="w-full h-full" />
+          </div>
         </div>
 
         <div className="w-full h-auto flex flex-col justify-center items-around gap-4">
