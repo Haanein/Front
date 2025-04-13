@@ -52,12 +52,19 @@ export default function PlaceCard({
     return stars;
   };
 
+  // Ensure categories is an array
+  const categoriesArray = Array.isArray(categories)
+    ? categories
+    : categories
+    ? [categories]
+    : [];
+
   return (
     <Link href={`/${id}`} passHref>
       <div className="z-10 w-full h-28 border border-[#33436A] border-separate border-spacing-2 rounded-xl flex items-center justify-around relative overflow-hidden">
         <div
           className="z-10 bg-center bg-cover rounded-xl w-[28%] h-24"
-          style={{ backgroundImage: `url(${img})` }} // Fix the backgroundImage syntax
+          style={{ backgroundImage: `url(${img})` }}
         ></div>
         <div className="w-[62%] flex flex-col justify-around items-around gap-1">
           <div className="absolute top-2 right-2">
@@ -68,14 +75,17 @@ export default function PlaceCard({
           </div>
           <h1 className="text-white font-bold">{name}</h1>
 
-          <div className="flex">
-            {categories.map((el, index) => (
-              <div key={index} className="w-auto p-2 h-4 text-sm bg-[#121B2C] rounded-2xl flex items-center justify-center text-white">
+          <div className="flex gap-1 flex-wrap">
+            {categoriesArray.map((el, index) => (
+              <div
+                key={index}
+                className="px-2 py-1 h-5 text-xs bg-[#121B2C] rounded-2xl flex items-center justify-center text-white"
+              >
                 {el}
               </div>
             ))}
           </div>
-          <h2 className="text-gray-400 text-sm ">{desc}</h2>
+          <h2 className="text-gray-400 text-sm">{desc}</h2>
           <div className="flex">
             <div className="flex">{renderStars(rating)}</div>
           </div>
