@@ -27,7 +27,7 @@ export default function DashboardPage() {
   const getUserData = (key) => {
     switch (key) {
       case "Username":
-        return user.username || user.firstName || "Not set";
+        return user.username || "Not set";
       case "Phone number":
         return user.primaryPhoneNumber?.phoneNumber || "Not set";
       case "Email":
@@ -90,9 +90,7 @@ export default function DashboardPage() {
           alt="Profile"
           className="w-24 h-24 rounded-full border-2 border-white object-cover"
         />
-        <h2 className="mt-2 text-lg font-semibold">
-          {user.firstName} {user.lastName}
-        </h2>
+        <h2 className="mt-2 text-lg font-semibold">{user.fullName}</h2>
       </div>
 
       {/* Personal Information */}
