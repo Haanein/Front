@@ -2,11 +2,15 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Header from "../components/Header";
+import { useClerk } from "@clerk/nextjs";
 
 export default function DashboardPage() {
   const { user, isLoaded, isSignedIn } = useUser();
+  const { signOut } = useClerk();
   const router = useRouter();
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // Redirect if not signed in
   if (isLoaded && !isSignedIn) {
@@ -39,35 +43,78 @@ export default function DashboardPage() {
     }
   };
 
-  // Handle item clicks
-  const handleItemClick = (item) => {
-    switch (item) {
-      case "Username":
-        router.push("/user-profile");
-        break;
-      case "Phone number":
-        user.createPhoneNumberVerification();
-        break;
-      case "Email":
-        router.push("/email-settings");
-        break;
-      case "Password":
-        router.push("/password-settings");
-        break;
-      case "Theme":
-        // Implement theme toggle functionality
-        break;
-      case "Language":
-        // Implement language settings
-        break;
-      case "Rate the app":
-        window.open("https://your-app-store-link.com", "_blank");
-        break;
-      case "Privacy Policy":
-        router.push("/privacy-policy");
-        break;
-      default:
-        break;
+  // Handle item clicks with improved Clerk functionality
+  const handleItemClick = async (item) => {
+    setIsUpdating(true);
+    try {
+      switch (item) {
+        case "Username":
+          // Clerk doesn't have a direct username update method through the frontend SDK
+          // We need to use the user.update() method
+          router.push("/user-profile");
+          break;
+        case "Phone number":
+          if (!user.primaryPhoneNumber) {
+            // If no phone number exists, show the phone verification UI
+            const phoneVerification = await user.createPhoneNumberVerification({
+              strategy: "popup",
+            });
+            // This will open Clerk's modal for phone verification
+          } else {
+            // If phone exists, navigate to a page to update it
+            router.push("/phone-settings");
+          }
+          break;
+        case "Email":
+          if (user.emailAddresses.length > 0) {
+            router.push("/email-settings");
+          } else {
+            // If no email exists, show the email creation UI
+            await user.createEmailAddress({
+              strategy: "popup",
+            });
+          }
+          break;
+        case "Password":
+          // This requires Clerk's hosted pages or a custom implementation
+          // Redirect to Clerk's password change page
+          const { openUserProfile } = useClerk();
+          openUserProfile({
+            initialPage: "security", // Open security tab directly
+          });
+          break;
+        case "Theme":
+          // Implement theme toggle functionality
+          // You would typically use a state or context for this
+          break;
+        case "Language":
+          // Implement language settings
+          router.push("/language-settings");
+          break;
+        case "Rate the app":
+          window.open("https://your-app-store-link.com", "_blank");
+          break;
+        case "Privacy Policy":
+          router.push("/privacy-policy");
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      console.error("Error handling item click:", error);
+      // Implement proper error handling here
+      // Could show a toast notification
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
   };
 
@@ -102,7 +149,9 @@ export default function DashboardPage() {
               key={item}
               className={`flex justify-between py-4 px-6 bg-gray-800 ${
                 index !== array.length - 1 ? "border-b border-gray-700" : ""
-              } cursor-pointer hover:bg-gray-700`}
+              } cursor-pointer hover:bg-gray-700 ${
+                isUpdating ? "opacity-50 pointer-events-none" : ""
+              }`}
               onClick={() => handleItemClick(item)}
             >
               <span>{item}</span>
@@ -123,7 +172,9 @@ export default function DashboardPage() {
             key={item}
             className={`flex justify-between py-4 px-6 bg-gray-800 ${
               index !== array.length - 1 ? "border-b border-gray-700" : ""
-            } cursor-pointer hover:bg-gray-700`}
+            } cursor-pointer hover:bg-gray-700 ${
+              isUpdating ? "opacity-50 pointer-events-none" : ""
+            }`}
             onClick={() => handleItemClick(item)}
           >
             <span>{item}</span>
@@ -140,7 +191,9 @@ export default function DashboardPage() {
             key={item}
             className={`flex justify-between py-4 px-6 bg-gray-800 ${
               index !== array.length - 1 ? "border-b border-gray-700" : ""
-            } cursor-pointer hover:bg-gray-700`}
+            } cursor-pointer hover:bg-gray-700 ${
+              isUpdating ? "opacity-50 pointer-events-none" : ""
+            }`}
             onClick={() => handleItemClick(item)}
           >
             <span>{item}</span>
@@ -152,11 +205,9 @@ export default function DashboardPage() {
       {/* Sign Out Button */}
       <div className="mt-8 flex justify-center">
         <button
-          onClick={() => {
-            user.signOut();
-            router.push("/");
-          }}
-          className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-full transition duration-200"
+          onClick={handleSignOut}
+          className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-full transition duration-200 disabled:opacity-50"
+          disabled={isUpdating}
         >
           Sign Out
         </button>
